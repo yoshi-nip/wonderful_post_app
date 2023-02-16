@@ -1,8 +1,11 @@
 class ArticlesController < ApplicationController
   before_action :set_article, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
+  before_action :ensure_correct_user, only: %i[ edit update destroy ]
 
   # GET /articles or /articles.json
   def index
+    # @articles = Article.where(user_id:current_user)
     @articles = Article.all
   end
 
@@ -21,7 +24,9 @@ class ArticlesController < ApplicationController
 
   # POST /articles or /articles.json
   def create
-    @article = Article.new(article_params)
+    @article = current_user.articles.new(article_params)
+
+    @article.user_id = current_user.id
 
     respond_to do |format|
       if @article.save
@@ -60,11 +65,22 @@ class ArticlesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_article
-      @article = Article.find(params[:id])
+      # @article = Article.find(params[:id])
+      @article = current_user.articles.find(params[:id])
+
     end
 
     # Only allow a list of trusted parameters through.
     def article_params
       params.require(:article).permit(:title, :content)
     end
+
+    # 投稿とユーザーが合っているか
+    def ensure_correct_user
+      if current_user.id != @article.user_id
+        flash[:notice] = "権限がありません"
+        redirect_to("/")
+      end
+    end
+
 end
