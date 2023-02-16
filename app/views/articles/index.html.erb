@@ -15,14 +15,7 @@
       <tr>
         <td><%= article.title %></td>
         <td><%= article.content %></td>
-        <td><%= link_to '詳細', article ,class: "btn btn-success" %></td>
-        <td><%= link_to '編集', edit_article_path(article) ,class: "btn btn-warning" %></td>
-        <td><%= link_to '削除', article ,class: "btn btn-danger", method: :delete, data: { confirm: '本当に削除しますか?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to '新規投稿', new_article_path %>
