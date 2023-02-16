@@ -37,6 +37,7 @@ group :development, :test do
   gem 'pry-doc'
   #日本語化
   gem 'rails-i18n', '~> 6.0.0'
+  gem 'devise-i18n'
   #'devise'の導入
   gem 'devise'
 end
