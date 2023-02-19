@@ -40,6 +40,9 @@ group :development, :test do
   gem 'devise-i18n'
   #'devise'の導入
   gem 'devise'
+  #kaminari
+  gem 'kaminari', '~> 0.17.0'
+  gem 'bootstrap4-kaminari-views'
 end
 
 group :development do
