@@ -14,7 +14,7 @@
 
 # user_records.each do |record|
 #   user = User.create!(record) unless User.find_by(email: record[:email])
-#   # user = User.find_or_create_by!(record)
+#   user = User.find_or_create_by!(record)
 #   50.times do |i|
 
 #   end
@@ -24,16 +24,26 @@
 #   user =Article.find_or_create_by!()
 # end
 
-# 3.times do |i|
-#   i += 1
-#   user = User.find_or_create_by!(email: "user00#{i}@test.com") do |_user|
-#     _user.password = 'test1234'
-#   end
+tag_records = [
+  {name: "プログラミング"},
+  {name: "習慣化"},
+  {name: "勉強"},
+  {name: "健康"},
+]
+tag_records.each do |record|
+    tag = Tag.find_or_create_by!(name: record[:name])
+end
 
-#   50.times do |ii|
-#     ii += 1
-#     user.articles.find_or_create_by!(title: "No.#{ii}: user00#{i}の記事") do |article|
-#       article.content = "No.#{ii}: user00#{i}の記事の本文"
-#     end
-#   end
-# end
+3.times do |i|
+  i += 1
+  user = User.find_or_create_by!(email: "user00#{i}@test.com") do |_user|
+    _user.password = 'test1234'
+  end
+  50.times do |ii|
+    ii += 1
+    user.articles.find_or_create_by!(title: "No.#{ii}: user00#{i}の記事") do |article|
+      article.content = "No.#{ii}: user00#{i}の記事の本文"
+      article.tag_ids = Tag.all.map(&:id)
+    end
+  end
+end
