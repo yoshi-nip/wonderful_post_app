@@ -7,9 +7,9 @@ class ArticlesController < ApplicationController
   def index
     # @articles = Article.where(user_id:current_user)
     # @articles = Article.page(params[:page])
-    @articles = Article.all
+    articles = Article.all.preload(:tags)
 
-    @articles = @articles.where('title LIKE ?',"%#{params[:title]}%") if params[:title] != nil
+    articles = @articles.where('title LIKE ?',"%#{params[:title]}%") if params[:title] != nil
 
     @articles = @articles.page(params[:page])
 
