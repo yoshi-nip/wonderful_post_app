@@ -33,7 +33,8 @@ class ArticlesController < ApplicationController
   def create
     @article = current_user.articles.new(article_params)
 
-    @article.user_id = current_user.id
+    # @article.user_id = current_user.id
+    # binding.pry
 
     respond_to do |format|
       if @article.save
@@ -79,7 +80,7 @@ class ArticlesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def article_params
-      params.require(:article).permit(:title, :content)
+      params.require(:article).permit(:title, :content,:tag_ids => [])
     end
 
     # 投稿とユーザーが合っているか
