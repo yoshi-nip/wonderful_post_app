@@ -3,12 +3,10 @@
 // a relevant structure within app/javascript and only use these pack files to reference
 // that code so it'll be compiled.
 
-// alert( "テスト画面に表示させたい値" )
 require("@rails/activestorage").start()
 require("channels")
-const Rails = require('rails-ujs')
-Rails.start()
 // require('test')
+
 import "bootstrap";
 import "../stylesheets/application.scss";
 

@@ -9,9 +9,9 @@ class ArticlesController < ApplicationController
     # @articles = Article.page(params[:page])
     articles = Article.all.preload(:tags)
 
-    articles = @articles.where('title LIKE ?',"%#{params[:title]}%") if params[:title] != nil
+    articles = articles.where('title LIKE ?',"%#{params[:title]}%") if params[:title] != nil
 
-    @articles = @articles.page(params[:page])
+    @articles = articles.page(params[:page])
 
   end
 
